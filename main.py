@@ -11,5 +11,3 @@ soup = BeautifulSoup(
 )
 
 jobs = soup.find("section", class_="jobs").find_all("li")
-
-print(jobs)
