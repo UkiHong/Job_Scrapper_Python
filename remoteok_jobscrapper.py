@@ -33,3 +33,4 @@ for keyword in keywords:
 
 
 print(all_jobs)
+print(len(all_jobs))
