@@ -2,6 +2,7 @@ from playwright.sync_api import sync_playwright
 import time
 from bs4 import BeautifulSoup
 import csv
+from file import save_to_file
 
 keywords = [
     "python",
@@ -30,7 +31,7 @@ def job_scrapper(keyword):
     # page.click("a#search_tab_position")
 
     for x in range(5):
-        time.sleep(2)
+        time.sleep(1)
         page.keyboard.down("End")
 
     content = page.content()
@@ -60,21 +61,7 @@ def job_scrapper(keyword):
         }
         jobs_db.append(job)
 
-    file = open(f"{keyword}_jobs.csv", "w")
-    writer = csv.writer(file)
-    writer.writerow(
-        [
-            "Title",
-            "Company",
-            "Location",
-            "Reward",
-            "Link",
-        ]
-    )
-
-    for job in jobs_db:
-        writer.writerow(job.values())
-        # .values 는 list = [a='1', b='2', c='3'] 의 list = [1,2,3] 이런식으로 key의 value 만 찾게해줌
+    save_to_file(jobs_db, keyword)
 
 
 for keyword in keywords:
